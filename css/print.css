@@ -70,7 +70,7 @@ header p, .content-text, .work-listing p, .content-text ul li:first-child, .work
 }
 
 .content-text ul li:first-child {
-  width:50%;
+  width:20%;
 }
 
 .profiles-listing ul li:first-child {

@@ -222,7 +222,7 @@ body > div > article > div > section:last-child {
 }
 
 .content-text ul li:first-child {
-  width:35%;
+  width: 20%;
   color: #424242;
   font-weight:600;
 }

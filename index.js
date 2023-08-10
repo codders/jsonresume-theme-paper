@@ -2,8 +2,38 @@ var fs = require("fs");
 var Handlebars = require("handlebars");
 const moment = require('moment');
 const _ = require('underscore');
+const process = require('process');
 
-moment.locale('de');
+const locale = process.env.RESUME_LOCALE || "en";
+
+moment.locale(locale);
+
+const i18l_labels = {
+    de: {
+        address: "Anschrift",
+        contact: "Kontakt",
+        phone: "Telefon",
+        skills: "Berufliche Fähigkeiten",
+        work: "Berufserfahrung",
+        to: "bis",
+        present: "Heute",
+        education: "Ausbildung",
+        languages: "Sprache",
+        profiles: "Profile"
+    },
+    en: {
+        address: "Address",
+        contact: "Contact",
+        phone: "Phone",
+        skills: "Professional Skills",
+        work: "Work Experience",
+        to: "to",
+        present: "Present",
+        education: "Education",
+        languages: "Languages",
+        profiles: "Profiles"
+    }
+};
 
 function formatDate(date) {
   return moment(date, 'YYYY-MM-DD').format('MMM YYYY');
@@ -15,6 +45,8 @@ function render(resume) {
     var template = fs.readFileSync(__dirname + "/resume.template", "utf-8");
     // Load print-specific css
     var print = fs.readFileSync(__dirname + "/css/print.css", "utf-8");
+
+    const labels = i18l_labels[locale];
 
     // Register custom handlebars extensions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // foreach loops //
@@ -88,7 +120,8 @@ function render(resume) {
     return Handlebars.compile(template)({
         css: css,
         print: print,
-        resume: resume
+        resume: resume,
+        labels: labels
     });
 }
 

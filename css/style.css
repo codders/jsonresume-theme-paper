@@ -78,6 +78,13 @@ header {
   margin-left:1em;
 }
 
+.header-text p {
+  font-size: 1.5em;
+}
+.header-text p.subtitle {
+  font-size: 1em;
+}
+
 header p {
   text-align:center;
   font-family: "Merriweather";
@@ -207,11 +214,16 @@ body > div > article > div > section:last-child {
   
 }
 
+.content-text p.standalone {
+  text-decoration: none;
+  font-family: "Open Sans";
+  font-size:0.7em;
+  margin-left: 2em;
+}
+
 .content-text ul li:first-child {
   width:35%;
-  
   color: #424242;
-  
   font-weight:600;
 }
 

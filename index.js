@@ -1,5 +1,13 @@
 var fs = require("fs");
 var Handlebars = require("handlebars");
+const moment = require('moment');
+const _ = require('underscore');
+
+moment.locale('de');
+
+function formatDate(date) {
+  return moment(date, 'YYYY-MM-DD').format('MMM YYYY');
+}
 
 function render(resume) {
     // Load css and template
@@ -52,6 +60,30 @@ function render(resume) {
     Handlebars.registerHelper('commalist', function(items, options) {
         return options.fn(items.join(', '));
     });
+
+    _(resume.work).forEach(work_info => {
+        const start_date = moment(work_info.startDate, 'YYYY-MM-DD');
+        const end_date = moment(work_info.endDate, 'YYYY-MM-DD');
+
+        if (start_date.isValid()) {
+          work_info.startDate = formatDate(start_date);
+        }
+
+        if (end_date.isValid()) {
+          work_info.endDate = formatDate(end_date);
+        }
+    });
+
+    _(resume.education).forEach(education_info => {
+        ['startDate', 'endDate'].forEach(type => {
+            const date = education_info[type];
+
+            if (date) {
+                education_info[type] = formatDate(date);
+            }
+        });
+    });
+
     // Compile
     return Handlebars.compile(template)({
         css: css,

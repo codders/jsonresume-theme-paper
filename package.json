@@ -9,7 +9,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "handlebars": "^4.5.3"
+    "handlebars": "^4.5.3",
+    "moment": "^2.29.4",
+    "underscore": "^1.13.6"
   },
   "homepage": "https://github.com/TimDaub/jsonresume-theme-paper",
   "main": "index.js",
